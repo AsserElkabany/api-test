@@ -13,7 +13,9 @@ exports.handler = async (req,method) =>
         }
 
     }else if(method === "POST"){
-        return JSON.stringify({ message: "get request received" });
+        //return JSON.stringify({ message: "get request received" });
+        console.log(req.body);
+        return JSON.stringify({ message: "POST request received" });
     }
  }
 
