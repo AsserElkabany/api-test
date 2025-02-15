@@ -35,3 +35,16 @@ exports.getUser = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+exports.addUser = async (req, res) => {
+    const name = req.body.name;
+    const phone = req.body.phone;
+    const password = req.body.password;
+    const user = new UsersDB( { name, phone, password } );
+    try {
+        await user.save();
+        res.status(201).json(user);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
