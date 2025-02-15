@@ -1,7 +1,15 @@
 const express = require("express");
 const UsersDB=require('../schema/users');
 const users = require("../schema/users");
+const jwt=require('jsonwebtoken');
+const jwtkey="asser222";
 
+exports.getHome = async (req, res) => 
+{
+    
+    const token = jwt.sign({phone:1}, jwtkey);
+    res.json("Welcome to the home page your token is "+token);
+}
 exports.getUsers = async (req, res) => {
     try 
     {
@@ -10,7 +18,7 @@ exports.getUsers = async (req, res) => {
     } 
     catch (error) 
     {
-        res.status(500)
+        res.status(500).json({ message: error.message });
     }
 }
 
