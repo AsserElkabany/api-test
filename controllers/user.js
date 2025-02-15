@@ -1,21 +1,29 @@
 const express = require("express");
 const UsersDB=require('../schema/users');
+const users = require("../schema/users");
 
-exports.handler = async (req,method) => 
+exports.getUsers = async (req, res) => {
+    try 
     {
-    if(method === "GET"){
-        //return JSON.stringify({ message: "POST request received" });
-        if(req.path === "/user")
-        {
-            const results = await UsersDB.find()
-            console.log(results)
-            return JSON.stringify({ users: results });
+        const users = await UsersDB.find();
+        res.status(200).json(users);
+    } 
+    catch (error) 
+    {
+        res.status(500)
+    }
+}
+
+exports.getUser = async (req, res) => {
+    try {
+        const user = await UsersDB.findById(req.params.id);
+        
+        if (!user) {
+            return res.status(404).json({ message: "User not found" }); 
         }
 
-    }else if(method === "POST"){
-        //return JSON.stringify({ message: "get request received" });
-        console.log(req.body);
-        return JSON.stringify({ message: "POST request received" });
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
- }
-
+};

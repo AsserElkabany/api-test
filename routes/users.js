@@ -3,4 +3,7 @@ const userController=require('../controllers/user');
 
 
 
-router.post('/signup',userController.postSignup)
+router.get('/getUsers',userController.getUsers);
+router.get('/getUser/:id',userController.getUser);
+
+module.exports=router;

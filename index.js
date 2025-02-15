@@ -8,20 +8,9 @@ const url = 'mongodb+srv://asser337:nodejs_11.11@cluster0.ceji32w.mongodb.net/ch
 const app = express();
 app.use(express.json());
 
+const router = require("./routes/users");
+app.use('/api', router);
 
-app.post("/", async (req, res) => {
-  console.log(req.body);
-  res.send(await handler(req, "POST"));
-});
-
-app.get("/", async (req, res) => {
-  res.send(await handler(req, "GET"));
-});
-
-
-app.get("/user", async (req, res) => {
-  res.send(await handler(req, "GET"));
-})
 
 mongoose.connect(url, {  
 })
