@@ -24,6 +24,7 @@ exports.getUsers = async (req, res) => {
 
 exports.getUser = async (req, res) => {
     try {
+        console.log("iam here-----------------");
         const user = await UsersDB.findById(req.params.id);
         
         if (!user) {
